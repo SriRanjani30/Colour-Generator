@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Generator</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffebcd;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+            border: 3px dashed #8b0000;
+        }
+        h1 {
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: #8b0000;
+            text-shadow: 2px 2px #ff4500;
+        }
+        #colorBox {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 15px;
+            background-color: #fff;
+            border: 5px solid #8b0000;
+            border-radius: 20px;
+            transition: background-color 0.5s ease;
+        }
+        #colorCode {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #8b0000;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        #generateBtn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #ff4500;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: background-color 0.3s ease;
+            box-shadow: 2px 2px #8b0000;
+        }
+        #generateBtn:hover {
+            background-color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Generator</h1>
+        <div id="colorBox"></div>
+        <div id="colorCode">#FFFFFF</div>
+        <button id="generateBtn">Generate Color!</button>
+    </div>
+    <script>
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        function generateColor() {
+            const randomColor = getRandomColor();
+            document.getElementById('colorBox').style.backgroundColor = randomColor;
+            document.getElementById('colorCode').textContent = randomColor;
+        }
+        document.getElementById('generateBtn').addEventListener('click', generateColor);
+    </script>
+</body>
+</html>
