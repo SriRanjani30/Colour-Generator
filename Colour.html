@@ -13,21 +13,24 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            transition: background-color 0.5s ease;
         }
         .container {
             text-align: center;
-            background-color: #ffebcd;
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             max-width: 350px;
             border: 3px dashed #8b0000;
+            background-color: #ffebcd;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         h1 {
             margin-bottom: 15px;
             font-size: 2rem;
             color: #8b0000;
             text-shadow: 2px 2px #ff4500;
+            transition: color 0.5s ease;
         }
         #colorBox {
             width: 200px;
@@ -36,7 +39,7 @@
             background-color: #fff;
             border: 5px solid #8b0000;
             border-radius: 20px;
-            transition: background-color 0.5s ease;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         #colorCode {
             margin-bottom: 15px;
@@ -46,6 +49,7 @@
             padding: 5px 10px;
             border-radius: 10px;
             display: inline-block;
+            transition: color 0.5s ease;
         }
         #generateBtn {
             padding: 10px 20px;
@@ -61,6 +65,13 @@
         #generateBtn:hover {
             background-color: #ff6347;
         }
+        #themeSelect {
+            margin-top: 20px;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +80,12 @@
         <div id="colorBox"></div>
         <div id="colorCode">#FFFFFF</div>
         <button id="generateBtn">Generate Color!</button>
+        <select id="themeSelect">
+            <option value="default">Default Theme</option>
+            <option value="dark">Dark Theme</option>
+            <option value="neon">Neon Theme</option>
+            <option value="pastel">Pastel Theme</option>
+        </select>
     </div>
     <script>
         function getRandomColor() {
@@ -84,7 +101,47 @@
             document.getElementById('colorBox').style.backgroundColor = randomColor;
             document.getElementById('colorCode').textContent = randomColor;
         }
+        function changeTheme(theme) {
+            const body = document.body;
+            const container = document.querySelector('.container');
+            const colorBox = document.getElementById('colorBox');
+            const colorCode = document.getElementById('colorCode');
+            const title = document.querySelector('h1');
+
+            if (theme === 'dark') {
+                body.style.backgroundColor = '#333';
+                container.style.backgroundColor = '#444';
+                container.style.borderColor = '#fff';
+                title.style.color = '#fff';
+                colorBox.style.borderColor = '#fff';
+                colorCode.style.color = '#fff';
+            } else if (theme === 'neon') {
+                body.style.backgroundColor = '#000';
+                container.style.backgroundColor = '#39ff14';
+                container.style.borderColor = '#ff00ff';
+                title.style.color = '#ff00ff';
+                colorBox.style.borderColor = '#ff00ff';
+                colorCode.style.color = '#ff00ff';
+            } else if (theme === 'pastel') {
+                body.style.backgroundColor = '#ffe4e1';
+                container.style.backgroundColor = '#ffb6c1';
+                container.style.borderColor = '#db7093';
+                title.style.color = '#db7093';
+                colorBox.style.borderColor = '#db7093';
+                colorCode.style.color = '#db7093';
+            } else {
+                body.style.backgroundColor = '#f0f8ff';
+                container.style.backgroundColor = '#ffebcd';
+                container.style.borderColor = '#8b0000';
+                title.style.color = '#8b0000';
+                colorBox.style.borderColor = '#8b0000';
+                colorCode.style.color = '#8b0000';
+            }
+        }
         document.getElementById('generateBtn').addEventListener('click', generateColor);
+        document.getElementById('themeSelect').addEventListener('change', function() {
+            changeTheme(this.value);
+        });
     </script>
 </body>
 </html>
